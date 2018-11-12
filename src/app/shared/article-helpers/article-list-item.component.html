@@ -1,0 +1,27 @@
+<nz-card class="card_class">
+  <div class="card_top">
+    <div class="card_top_left" [routerLink]="['/profile', article.author.username]">
+      <nz-avatar [nzText]="article.author.username" nzSize="large" style="vertical-align: middle; outline: none"
+                 [hidden]="article.author.image.length > 0"></nz-avatar>
+      <nz-avatar nzSize="large" [nzSrc]="article.author.image" [hidden]="article.author.image.length <= 0" style="vertical-align: middle; outline: none"></nz-avatar>
+    </div>
+    <div class="card_top_middle">
+      <span class="author" [routerLink]="['/profile', article.author.username]">{{ article.author.username }}</span>
+      <span class="create_date">{{ article.createdAt | date: 'longDate' }}</span>
+    </div>
+    <button nz-button nzType="default" class="unlike_btn" (click)="toggleFavorite()">
+      <i nz-icon [type]="'heart'" [theme]="'twotone'" [twoToneColor]="'#5cb85c'"></i>
+      {{article.favoritesCount}}
+    </button>
+  </div>
+  <div class="card_middle" [routerLink]="['/article', article.slug]">
+    <span class="article_title">{{ article.title }}</span>
+    <span class="article_desc">{{ article.description }}</span>
+  </div>
+  <div class="card_foot" [routerLink]="['/article', article.slug]">
+    <span class="article_read_more">Read more...</span>
+    <div class="tag_container" *ngIf="article.tagList.length > 0">
+      <nz-tag *ngFor="let tag of tagList">{{tag}}</nz-tag>
+    </div>
+  </div>
+</nz-card>

@@ -1,0 +1,39 @@
+<app-list-errors [errors]="errors"></app-list-errors>
+<form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm($event,validateForm.value)">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Article Title</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input formControlName="title" placeholder="Article Title">
+      <nz-form-explain *ngIf="validateForm.get('title').dirty && validateForm.get('title').errors">
+        <ng-container *ngIf="validateForm.get('title').hasError('required')">
+          Please Input Article Title!
+        </ng-container>
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Article About</nz-form-label>
+    <nz-form-control [nzSpan]="12" nzHasFeedback>
+      <input nz-input formControlName="description" placeholder="What's this article about?">
+      <nz-form-explain *ngIf="validateForm.get('description').dirty&&validateForm.get('description').errors">
+        <ng-container *ngIf="validateForm.get('description').hasError('required')">
+          Please Input Article About!
+        </ng-container>
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="7" nzRequired>Comment</nz-form-label>
+    <nz-form-control [nzSpan]="12">
+      <textarea formControlName="body" nz-input rows="2" placeholder="Write Your Article(in markdown)"></textarea>
+      <nz-form-explain *ngIf="validateForm.get('body').dirty&&validateForm.get('body').hasError('required')">
+        Please Write Your Article Here!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control [nzOffset]="7" [nzSpan]="12">
+      <button nz-button nzType="primary" [disabled]="!validateForm.valid" [nzLoading]="isSubmitting">Submit</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

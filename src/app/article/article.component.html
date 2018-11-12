@@ -1,0 +1,65 @@
+<nz-layout>
+  <nz-header class="article_head">
+    <span class="article_title">{{ article.title }}</span>
+    <div class="article_head_bottom">
+      <nz-avatar nzIcon="anticon anticon-user" [nzSrc]="article.author.image"></nz-avatar>
+      <div class="article_head_uname_time">
+        <span class="article_username">{{ article.author.username }}</span>
+        <span class="article_time">{{ article.createdAt | date: 'longDate' }}</span>
+      </div>
+      <app-follow-button [profile]="article.author" (toggle)="onToggleFollowing($event)"
+                         style="margin-left: 10px;" *ngIf="!canModify"></app-follow-button>
+      <app-favorite-button (toggle)="onToggleFavorite($event)" [article]="article" style="margin-left: 10px;"
+                           *ngIf="!canModify">
+        {{article.favorited ? 'Unfavorite' : 'Favorite'}} Article <span class="favorite_counter">({{ article.favoritesCount }})</span>
+      </app-favorite-button>
+      <button nz-button nzType="primary" class="article_edit_btn" *ngIf="canModify" [routerLink]="['/editor', article.slug]">
+        <i nz-icon type="edit" theme="outline"></i>
+        Edit Article
+      </button>
+      <button nz-button nzType="primary" class="article_del_btn" *ngIf="canModify" (click)="deleteArticle()"
+              [nzLoading]="isDeleting">
+        <i nz-icon type="delete" theme="outline"></i>
+        Delete Article
+      </button>
+    </div>
+  </nz-header>
+  <nz-content class="article_content">
+    <div class="article_content_inner">
+      <div style="font-family: 'source serif pro',serif;font-size: 1.2rem;line-height: 1.8rem;margin-bottom: 2rem;"
+           [innerHTML]="article.body | markdown"></div>
+      <div class="article_tag">
+        <nz-tag *ngFor="let tag of article.tagList">{{tag}}</nz-tag>
+      </div>
+      <nz-divider></nz-divider>
+      <div *appShowAuthed="false" class="article_tip">
+        <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this
+        article.
+      </div>
+      <nz-card style="margin: 10px 10%;" *appShowAuthed="true">
+        <app-list-errors [errors]="commentFormErrors"></app-list-errors>
+        <form nz-form [formGroup]="commentForm" (ngSubmit)="addComment()">
+          <nz-form-item>
+            <nz-form-control [nzSpan]="24">
+              <textarea rows="4" nz-input formControlName="commentBody"
+                        placeholder="write a comment"></textarea>
+              <nz-form-explain *ngIf="commentForm.get('commentBody').dirty && commentForm.get('commentBody').errors">
+                Please input your comment
+              </nz-form-explain>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item [nzFlex]="true" style="justify-content: flex-end">
+            <nz-form-control style="justify-content: flex-end">
+              <button nz-button class="login-form-button" [nzType]="'primary'" [disabled]="!commentForm.valid"
+                      [nzLoading]="isSubmitting">Submit
+              </button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </nz-card>
+      <div class="comment_list_outer">
+        <app-article-comment-list [slug]="article.slug" #commentListComponent></app-article-comment-list>
+      </div>
+    </div>
+  </nz-content>
+</nz-layout>

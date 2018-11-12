@@ -1,0 +1,7 @@
+<div *ngIf="errorList && errorList.length > 0">
+  <div nz-row *ngFor="let error of errorList; let i = index;">
+    <div nz-col nzSpan="24" class="error_tip_class">
+      {{i+1}}.{{error}}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<nz-layout>
+  <nz-header class="home_head_class" *appShowAuthed="false">
+    <div class="logo-font">conduit</div>
+    <div class="logo-bottom">
+      A place to share your
+      <i>
+        Angular 2
+      </i>
+      knowledge.
+    </div>
+  </nz-header>
+  <nz-content class="home_content_class">
+    <div class="home_content_left_class">
+      <nz-tabset [nzSelectedIndex]="activeIndex" class="tabset_class" (nzSelectedIndexChange)="onNzSelectedIndexChange($event)">
+        <nz-tab [nzTitle]="tab" *ngFor="let tab of tabSetData">
+        </nz-tab>
+      </nz-tabset>
+      <app-article-list [config]="listConfig"></app-article-list>
+    </div>
+    <div class="home_content_right_class">
+      <nz-card class="tag_card_container">
+        <nz-skeleton [nzActive]="true" [nzLoading]="tagsLoading" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+        <div [hidden]="tagsLoading">
+          <span>Popular Tags</span>
+          <div class="tag_container_class">
+            <span *ngFor="let tag of tags" class="tag_item" (click)="selectTag(tag)"
+                  [ngClass]="tag === currentTag ? 'tag_item_select' : ''">{{tag}}</span>
+          </div>
+        </div>
+        <div [hidden]="tagsLoading || tags.length > 0">
+          No tags are here... yet.
+        </div>
+      </nz-card>
+    </div>
+  </nz-content>
+</nz-layout>

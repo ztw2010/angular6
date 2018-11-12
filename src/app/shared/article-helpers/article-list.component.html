@@ -1,0 +1,8 @@
+<nz-spin [nzSpinning]="loading"></nz-spin>
+<div *ngIf="!loading && results.length <= 0">
+  No articles are here... yet.
+</div>
+<app-article-list-item *ngFor="let item of results" [article]="item"></app-article-list-item>
+<nz-pagination [nzPageIndex]="currentPage" [nzTotal]="totalPage" [nzPageSize]="limit" [nzHideOnSinglePage]="true"
+               class="pagination_class" [hidden]="loading" nzShowSizeChanger
+               (nzPageIndexChange)="setPageTo($event)" (nzPageSizeChange)="changePageSize($event)"></nz-pagination>

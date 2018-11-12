@@ -1,0 +1,36 @@
+<div nz-row nzType="flex" nzAlign="middle">
+  <div nz-col nzSpan="8">
+    <a class="navbar-brand" routerLink="/">conduit</a>
+  </div>
+  <div nz-col nzSpan="12" nzOffset="4" class="top_right_col_class">
+    <div *appShowAuthed="false">
+      <button nz-button nzType="default" class="nav_btn_class" routerLink="/" routerLinkActive="btn_active"
+              [routerLinkActiveOptions]="{ exact: true }">
+        Home
+      </button>
+      <button nz-button nzType="default" class="nav_btn_class" routerLink="/login" routerLinkActive="btn_active"
+              [routerLinkActiveOptions]="{ exact: true }">Sign
+      </button>
+      <button nz-button nzType="default" class="nav_btn_class" routerLink="/register" routerLinkActive="btn_active"
+              [routerLinkActiveOptions]="{ exact: true }">Sign Up
+      </button>
+    </div>
+    <div *appShowAuthed="true" style="display: flex; flex-direction: row; align-items: center;">
+      <button nz-button nzType="default" class="nav_btn_class" routerLink="/" routerLinkActive="btn_active"
+              [routerLinkActiveOptions]="{ exact: true }">
+        Home
+      </button>
+      <button nz-button nzType="default" class="nav_btn_class" routerLink="/editor" routerLinkActive="btn_active"
+              [routerLinkActiveOptions]="{ exact: true }">New Article
+      </button>
+      <button nz-button nzType="default" class="nav_btn_class" routerLink="/settings" routerLinkActive="btn_active"
+              [routerLinkActiveOptions]="{ exact: true }">Settings
+      </button>
+      <nz-avatar *ngIf="currentUser.image" [nzSrc]="currentUser.image" style="margin: 0px 5px"></nz-avatar>
+      <button nz-button nzType="default" class="nav_btn_class" [routerLink]="['/profile', currentUser.username]"
+              routerLinkActive="btn_active"
+              [routerLinkActiveOptions]="{ exact: true }">{{ currentUser.username }}
+      </button>
+    </div>
+  </div>
+</div>

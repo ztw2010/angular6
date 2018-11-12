@@ -1,0 +1,19 @@
+.comment_item_card {
+  margin: 10px 10%;
+}
+
+.comment_item_card_bottom {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #e5e5e5;
+  box-shadow: none !important;
+  font-size: .8rem;
+  background-color: #f5f5f5;
+  flex-direction: row;
+  margin: 10px -24px -24px -24px;
+  align-items: center;
+}
+
+.margin_left10 {
+  margin-left: 10px;
+}

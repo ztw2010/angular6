@@ -1,0 +1,8 @@
+<nz-skeleton [nzActive]="true" [nzLoading]="isLoading"></nz-skeleton>
+<span *ngIf="!comments || comments.length <= 0">Have none comments yet...</span>
+<app-article-comment-item *ngFor="let comment of comments" [comment]="comment"
+                          (deleteComment)="onDeleteComment($event)"></app-article-comment-item>
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Tips" (nzOnOk)="sure2Delete()" [nzOkLoading]="isOkLoading"
+          (nzOnCancel)="handleCancel()">
+  <p>Are you sure to delete this comment?</p>
+</nz-modal>

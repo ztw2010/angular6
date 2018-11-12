@@ -1,0 +1,4 @@
+<button nz-button nzType="primary" class="follow_btn" (click)="toggleFollowing()" [nzLoading]="isSubmitting">
+  <i nz-icon type="plus" theme="outline"></i>
+  {{ profile.following ? 'Unfollow' : 'Follow' }} {{ profile.username }}
+</button>

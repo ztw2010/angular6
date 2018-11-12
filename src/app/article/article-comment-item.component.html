@@ -1,0 +1,13 @@
+<nz-card class="comment_item_card">
+  <span>{{ comment.body }}</span>
+  <div class="comment_item_card_bottom">
+    <nz-avatar nzSize="small" [nzSrc]="comment.author.image"></nz-avatar>
+    <a [routerLink]="['/profile', comment.author.username]" class="margin_left10">
+      {{ comment.author.username }}
+    </a>
+    <span class="margin_left10">
+      {{ comment.createdAt | date: 'longDate' }}
+    </span>
+    <i nz-icon type="delete" theme="outline" style="position: absolute; right: 10px; cursor: pointer" [hidden]="!canModify" (click)="deleComment()"></i>
+  </div>
+</nz-card>

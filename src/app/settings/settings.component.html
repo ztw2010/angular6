@@ -1,0 +1,62 @@
+<form nz-form [formGroup]="validateForm" class="settings-form" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control>
+      <input type="text" nz-input formControlName="image" placeholder="URL of profile picture">
+      <nz-form-explain *ngIf="validateForm.get('image').dirty && validateForm.get('image').errors">Please input
+        the right url!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <input nz-input formControlName="username" placeholder="Username">
+      <nz-form-explain *ngIf="validateForm.get('username').dirty && validateForm.get('username').errors">Please input
+        your Username!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <textarea formControlName="bio" nz-input rows="2" placeholder="Short bio about you"></textarea>
+      <nz-form-explain *ngIf="validateForm.get('bio').dirty && validateForm.get('bio').errors">Please input
+        your bio!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <input type="email" nz-input formControlName="email" placeholder="Email">
+      <nz-form-explain *ngIf="validateForm.get('email').dirty && validateForm.get('email').errors">Please input
+        the right email!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <input nz-input type="password" formControlName="password" placeholder="New Password">
+      <nz-form-explain *ngIf="validateForm.get('password').dirty && validateForm.get('password').errors">Please input
+        your new password!
+      </nz-form-explain>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row>
+    <nz-form-control [nzSpan]="6" [nzOffset]="18">
+      <button nz-button nzType="primary" [nzLoading]="isSubmitting">Update Settings</button>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row>
+    <nz-form-control>
+      <nz-divider></nz-divider>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item nz-row>
+    <nz-form-control [nzSpan]="8" [nzOffset]="16">
+      <button nz-button nzType="primary" [nzLoading]="isSubmitting" class="settings_logout_btn" (click)="logout()">Or
+        Click Here To Logout
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
+
+
+
